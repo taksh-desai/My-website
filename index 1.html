@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Porsche Showroom</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #111;
+      color: #fff;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background: #000;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff6b35;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+    .nav-links li {
+      margin-left: 2rem;
+    }
+    .nav-links a {
+      position: relative;
+      padding: 5px 0;
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ff6b35;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -3px;
+      left: 0;
+      background: #ff6b35;
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: url("https://images.unsplash.com/photo-1634673970798-a15ae56f6c65?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cG9yc2NoZSUyMGd0M3JzfGVufDB8fDB8fHww") no-repeat center center/cover;
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      padding: 20px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #ff6b35;
+    }
+    .hero p {
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+    .cta-button {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      background: #ff6b35;
+      color: #fff;
+      border-radius: 30px;
+      transition: background 0.3s ease;
+    }
+    .cta-button:hover {
+      background: #e65a25;
+    }
+
+    /* Models */
+    .models-container {
+      padding: 3rem 5%;
+      text-align: center;
+    }
+    .models-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #ff6b35;
+    }
+    .models-header p {
+      margin-bottom: 2rem;
+      color: #ccc;
+    }
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .model-card {
+      background: #1a1a1a;
+      padding: 1.5rem;
+      border-radius: 15px;
+      text-align: left;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .model-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(255,107,53,0.2);
+    }
+    .car-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .car-image:hover {
+      transform: scale(1.05);
+    }
+    .model-card h3 { color: #ff6b35; margin-bottom: 0.5rem; }
+    .price {
+      margin: 1rem 0;
+      font-weight: bold;
+      color: #fff;
+    }
+    .contact-container {
+      padding: 3rem 5%;
+      text-align: center;
+    }
+    .contact-header h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      color: #ff6b35;
+    }
+    .contact-header p {
+      margin-bottom: 2rem;
+      color: #ccc;
+    }
+    .contact-form {
+      max-width: 600px;
+      margin: auto;
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: left;
+    }
+    .form-group { margin-bottom: 1rem; }
+    label { display: block; margin-bottom: 0.5rem; color: #ff6b35; }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      background: #333;
+      color: #fff;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: 2px solid #ff6b35;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #000;
+      color: #aaa;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Porsche</div>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#models">Models</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Experience Porsche</h1>
+      <p>Where timeless design meets cutting-edge technology. Explore our world-class sports cars built for the ultimate driving experience.</p>
+      <a href="#models" class="cta-button">Explore Models</a>
+    </div>
+  </section>
+  <section id="models" class="models-container">
+    <div class="models-header">
+      <h2>Our Collection</h2>
+      <p>Discover the perfect Porsche for your lifestyle</p>
+    </div>
+    <div class="models-grid">
+      <div class="model-card">
+        <img src="https://hips.hearstapps.com/hmg-prod/images/2025-porsche-911-carrera-gts-145-68af3df4bea4b.jpg?crop=0.620xw:0.522xh;0.335xw,0.229xh&resize=2048:*" alt="Porsche 911" class="car-image">
+        <h3>Porsche 911</h3>
+        <p>The legendary rear-engine sports car that defines performance and style.</p>
+        <div class="price">Starting at Rs.85.95Lakh</div>
+      </div>
+      <div class="model-card">
+        <img src="https://www.topgear.com/sites/default/files/cars-car/image/2019/11/rp_-_porsche_718_boxster_spyder-19_0.jpg" alt="Porsche 718" class="car-image">
+        <h3>Porsche 718</h3>
+        <p>Mid-engine agility and pure driving pleasure in its most concentrated form.</p>
+        <div class="price">Starting at Rs.2Cr</div>
+      </div>
+      <div class="model-card">
+        <img src="https://di-uploads-pod17.dealerinspire.com/porschewoodlandhills/uploads/2024/09/2025-Porsche-Cayenne.png" alt="Porsche Cayenne" class="car-image">
+        <h3>Porsche Cayenne</h3>
+        <p>The sports car among SUVs. Luxury, versatility, and Porsche DNA combined.</p>
+        <div class="price">Starting at Rs.1.39Cr</div>
+      </div>
+      <div class="model-card">
+        <img src="https://i.cdn.newsbytesapp.com/images/l99320240207100814.jpeg" alt="Porsche Taycan" class="car-image">
+        <h3>Porsche Taycan</h3>
+        <p>The future of sports cars is electric. Sustainable performance with Porsche spirit.</p>
+        <div class="price">Starting at Rs.1.89Cr</div>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="contact-container">
+    <div class="contact-header">
+      <h2>Contact Us</h2>
+      <p>Interested in a Porsche? Reach out to us today.</p>
+    </div>
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="model">Select Model</label>
+        <select id="model" required>
+          <option value="">Choose a model</option>
+          <option value="911">Porsche 911</option>
+          <option value="718">Porsche 718</option>
+          <option value="Cayenne">Porsche Cayenne</option>
+          <option value="Taycan">Porsche Taycan</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" rows="5" placeholder="Type your message here"></textarea>
+      </div>
+      <button type="submit" class="cta-button">Send Message</button>
+    </form>
+  </section>
+  <footer>
+    © 2025 Porsche Showroom | Designed By Taksh
+  </footer>
+</body>
+</html>
